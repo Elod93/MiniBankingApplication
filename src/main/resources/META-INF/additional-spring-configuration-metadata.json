@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "bank.app.jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for bank.app.jwtSecret."
+    },
+    {
+      "name": "bank-webaplication-back-end.app.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for bank-webaplication-back-end.app.jwtSecret."
+    },
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for bank.app.jwtSecret."
+    }
+  ] }
