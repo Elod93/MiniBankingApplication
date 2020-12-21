@@ -1,0 +1,3 @@
+[submodule "MiniInternetBankingWebaplication"]
+	path = MiniInternetBankingWebaplication
+	url = https://github.com/Elod93/MiniInternetBankingWebapplication.git
