@@ -1,9 +1,8 @@
 package org.backend.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Account {
@@ -12,13 +11,17 @@ public class Account {
     private Long id;
 
     @Column
-    private String name;
-
-    @Column
     private String IBAN;
 
     @Column
-    private Long bill;
+    private Long balance;
+
+    @Column
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    private LocalDateTime date;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private User user;
 
 
     public Long getId() {
@@ -29,14 +32,6 @@ public class Account {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getIBAN() {
         return IBAN;
     }
@@ -45,13 +40,28 @@ public class Account {
         this.IBAN = IBAN;
     }
 
-    public Long getBill() {
-        return bill;
+
+    public Long getBalance() {
+        return balance;
     }
 
-    public void setBill(Long bill) {
-        this.bill = bill;
+    public void setBalance(Long balance) {
+        this.balance = balance;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
 
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

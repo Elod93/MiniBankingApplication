@@ -1,10 +1,13 @@
 package org.backend.Models;
 
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User implements UserDetails {
@@ -15,9 +18,16 @@ public class User implements UserDetails {
     private String username;
     @Column
     private String password;
-
+    @Column
+    private String fullName;
+    @Column
+    private Long identityNumber;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Account account;
+    private PostAddress postAddress;
+
+    @JsonIgnore
+   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Account>account=new ArrayList<>();
 
     public long getId() {
         return id;
@@ -29,6 +39,14 @@ public class User implements UserDetails {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Override
@@ -68,13 +86,27 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Account getAccount() {
+    public PostAddress getPostAddress() {
+        return postAddress;
+    }
+
+    public void setPostAddress(PostAddress postAddress) {
+        this.postAddress = postAddress;
+    }
+
+    public List<Account> getAccount() {
         return account;
     }
 
-    public void setAccount(Account account) {
+    public void setAccount(List<Account> account) {
         this.account = account;
     }
 
+    public Long getIdentityNumber() {
+        return identityNumber;
+    }
 
+    public void setIdentityNumber(Long identityNumber) {
+        this.identityNumber = identityNumber;
+    }
 }

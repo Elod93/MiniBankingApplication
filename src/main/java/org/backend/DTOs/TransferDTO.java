@@ -2,9 +2,13 @@ package org.backend.DTOs;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotEmpty;
+
 @Component
 public class TransferDTO {
+    @NotEmpty
     private String IBAN;
+    @NotEmpty
     private Long bill;
 
     public String getIBAN() {
