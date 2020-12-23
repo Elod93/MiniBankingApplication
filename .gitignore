@@ -1,3 +1,4 @@
-.iml
-.idea/
-target/
+bank-webaplication-back-end.iml
+.idea
+.gitmodules
+target

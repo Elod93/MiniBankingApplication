@@ -10,6 +10,9 @@
 /home/elod/IdeaProjects/bank-webaplication-back-end/src/main/java/org/backend/Configuration/WebSecurityConfig.java
 /home/elod/IdeaProjects/bank-webaplication-back-end/target/generated-sources/java/org/backend/Models/QAccount.java
 /home/elod/IdeaProjects/bank-webaplication-back-end/target/generated-sources/java/org/backend/Models/QUser.java
+/home/elod/IdeaProjects/bank-webaplication-back-end/src/main/java/org/backend/Models/History.java
+/home/elod/IdeaProjects/bank-webaplication-back-end/target/generated-sources/java/org/backend/Models/QHistory.java
 /home/elod/IdeaProjects/bank-webaplication-back-end/src/main/java/org/backend/Models/User.java
 /home/elod/IdeaProjects/bank-webaplication-back-end/src/main/java/org/backend/Models/PostAddress.java
 /home/elod/IdeaProjects/bank-webaplication-back-end/src/main/java/org/backend/Application.java
+/home/elod/IdeaProjects/bank-webaplication-back-end/src/main/java/org/backend/DTOs/UserDTO.java

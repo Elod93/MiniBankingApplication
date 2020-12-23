@@ -1,6 +1,6 @@
 package org.backend.Models;
 
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Column
     private String username;
@@ -22,12 +22,12 @@ public class User implements UserDetails {
     private String fullName;
     @Column
     private Long identityNumber;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne( cascade = CascadeType.ALL)
     private PostAddress postAddress;
-
-    @JsonIgnore
-   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JsonIgnore
+   @OneToMany(fetch = FetchType.LAZY,orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Account>account=new ArrayList<>();
+
 
     public long getId() {
         return id;
@@ -109,4 +109,6 @@ public class User implements UserDetails {
     public void setIdentityNumber(Long identityNumber) {
         this.identityNumber = identityNumber;
     }
+
+
 }

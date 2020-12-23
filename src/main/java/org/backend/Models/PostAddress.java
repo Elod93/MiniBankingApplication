@@ -1,27 +1,31 @@
 package org.backend.Models;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class PostAddress {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Column
-    @NotEmpty
+    @NotNull(message = "Please enter post code")
     private Integer postCode;
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Please enter the city name")
     private String cityName;
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Please enter the street name")
     private  String streetName;
     @Column
-    @NotEmpty
+    @NotNull(message = "Please enter the house number")
     private  Integer houseNumber;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     public Long getId() {
