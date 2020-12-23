@@ -1,0 +1,14 @@
+.sign-up-form{
+    display:flex ;
+    flex-direction: column;
+}
+.sign-in-label{
+    display: flex;
+    align-items: flex-start;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 25px;
+    padding-bottom: 12px;
+    color: #fff;
+
+}

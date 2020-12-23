@@ -1,0 +1,13 @@
+.input--large{
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 1px solid #2d9fd9;
+    padding-left: 20px;
+    font-size: 20px;
+    width: 440px;
+    height: 40px;
+}
+.input--large:focus{
+    outline: none;
+}
