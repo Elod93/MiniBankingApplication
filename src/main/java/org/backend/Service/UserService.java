@@ -5,8 +5,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.backend.DTOs.AccountDTO;
-import org.backend.Models.Account;
-import org.backend.Models.QAccount;
 import org.backend.Models.QUser;
 import org.backend.Models.User;
 import org.backend.Reporitory.UserRepository;
@@ -15,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -40,6 +37,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return user;
     }
+
     public List<User> findUserByParams(AccountDTO accountDTO) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         BooleanBuilder booleanBuilder = new BooleanBuilder();
@@ -51,7 +49,7 @@ public class UserService implements UserDetailsService {
         if (StringUtils.isNotBlank(accountDTO.getIban())) {
             booleanBuilder.and(QUser.user.account.any().IBAN.like(accountDTO.getIban()));
         }
-        if(accountDTO.getPostAddress()!=null) {
+        if (accountDTO.getPostAddress() != null) {
             if (StringUtils.isNotBlank(accountDTO.getPostAddress().getCityName())) {
                 booleanBuilder.and(QUser.user.postAddress.cityName.like(accountDTO.getPostAddress().getCityName()));
             }
@@ -70,5 +68,6 @@ public class UserService implements UserDetailsService {
                 .where(booleanBuilder)
                 .fetch();
     }
+
 
 }

@@ -23,6 +23,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,32 +46,21 @@ public class HomeController {
         this.userRepository = userRepository;
     }
 
-
-    @GetMapping(value = "/home/{account_id}")
-    public List<Account> getAccount(@PathVariable Long account_id) {
-        if (accountRepository.findById(account_id).isPresent()) {
-            return accountRepository.findById(account_id).stream().collect(Collectors.toList());
-        } else {
-            return null;
-        }
-    }
-
-    @PostMapping(value = "/transfer")
+    @PostMapping(value = "/transfer/{username}")
     @ResponseBody
     @Transactional
-    public ResponseEntity<String> transfer(@Valid @RequestBody(required = false) TransferDTO transferDTO, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<String> transfer(@PathVariable String username,@Valid @RequestBody(required = false) TransferDTO transferDTO) {
         History myAccountHistory = new History();
         History accountHistory = new History();
         Long myAccountId = null;
         Account accountByIBAN = accountRepository.findAccountByIBAN(transferDTO.getIBAN()); //the account where I send money
-        Principal principal = httpServletRequest.getUserPrincipal();   //logged in user where send money
-        if (userRepository.findUserWithName(principal.getName()).isPresent()) {
-            List<Account> myAccounts = userRepository.findUserWithName(principal.getName()).get().getAccount();
+        if (userRepository.findUserWithName(username).isPresent()) {
+            List<Account> myAccounts = userRepository.findUserWithName(username).stream().map(User::getAccount).collect(Collectors.toList())
+                    .stream().flatMap(List::stream).collect(Collectors.toList());
             for (Account myAccount : myAccounts) {
                 if (myAccount.getIBAN().equals(transferDTO.getMyIBAN())) { //choose the real account
                     myAccountId = myAccount.getId();
-                } else {
-                    return ResponseEntity.status(HttpStatus.CONFLICT).body("False IBAN");
+                    System.out.println(myAccountId);
                 }
             }
         } else {
@@ -147,6 +137,21 @@ public class HomeController {
         } else {
             return null;
         }
+    }
+    @GetMapping(value = "/home/{username}")
+    public List<Account> getAccount(@PathVariable String username) {
+        if (userRepository.findUserWithName(username).isPresent()) {
+            return (List<Account>) userRepository.findUserWithName(username).stream().map(User::getAccount).collect(Collectors.toList())
+                    .stream().flatMap(List::stream).collect(Collectors.toList());
+        } else {
+            return null;
+        }
+    }
+    @GetMapping(value = "/all_accounts")
+    public List<Account> getAllAccount() {
+       List<Account> accountList= new ArrayList<>();
+       accountList=accountRepository.findAll();
+       return accountList;
     }
 
 }

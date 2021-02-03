@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @OneToOne( cascade = CascadeType.ALL)
     private PostAddress postAddress;
   @JsonIgnore
-   @OneToMany(fetch = FetchType.LAZY,orphanRemoval = true, cascade = CascadeType.PERSIST)
+   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Account>account=new ArrayList<>();
 
 
