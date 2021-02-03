@@ -7,7 +7,6 @@ const SIZE = ['btn--medium', 'btn--large'];
 export const Button = ({
     children,
     type,
-    onClick,
     buttonStyle,
     buttonSize
 }) => {
@@ -17,15 +16,13 @@ export const Button = ({
     return (
         
             <button
-                className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-                oneClick={onClick}
+                className={`${checkButtonStyle} ${checkButtonSize}`}
                 type={type}
                 
             >
                 {children}
                 
             
-            </button>  
-      
+            </button>    
     );
 };

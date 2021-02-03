@@ -17,15 +17,17 @@ function Navbar() {
             setButton(true)
         }
     };
-
+function deleteStorage() {
+   return sessionStorage.setItem('user',"");  
+}
     window.addEventListener('resize', showButton);
     return (
         <>
             <nav className="Navbar">
                 <div className="navbar-container">
-                    <Link to="/" className="navbar-logo">
+                    <span to="" className="navbar-logo">
                     E-BANK
-                    </Link>
+                    </span>
                     <div className='menu-icon' onClick={handleClick}>
                         <i className={click ? 'fas fa-times':'fa-fa-bars'} />
                     </div>
@@ -34,15 +36,21 @@ function Navbar() {
                             <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
                                 Home
                             </Link>
-                        </li> <li className='nav-item'>
+                        </li>
+                        <li className='nav-item'>
                             <Link to='/transfer' className='nav-links' onClick={closeMobileMenu}>
                             Transfer
                             </Link>
                         </li>
+                        <li className='nav-item'>
+                            <Link to='/all_accounts' className='nav-links' onClick={closeMobileMenu}>
+                          All Accounts
+                            </Link>
+                        </li>
                         </ul>
                     <Link to='/' >
-                        {button && <Button buttonStyle='btn--outline'>Sign-Out</Button>}
-                    </Link>
+                        {button && <Button onClick={() => deleteStorage()} buttonStyle='btn--outline'>Sign-Out</Button>}
+                       </Link> 
                 </div>
             </nav>         
         </>
